@@ -117,5 +117,11 @@ The interval numbered 835 is the one with the highest number of averages steps, 
 ## Imputing missing values
 
 
+```r
+sizeNA <- length(df[,1]) - length(which(cc))
+```
+The number of NA's in the original data set was 2304.
+
+
 
 ## Are there differences in activity patterns between weekdays and weekends?

@@ -152,6 +152,8 @@ maxAvgVal &lt;- sorted[1,2]</code></pre>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
+<pre class="r"><code>sizeNA &lt;- length(df[,1]) - length(which(cc))</code></pre>
+<p>The number of NA’s in the original data set was 2304.</p>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
