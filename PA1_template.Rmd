@@ -8,24 +8,42 @@ output:
 
 ## Loading and preprocessing the data
 
-
-
 ```{r}
 library(lubridate)
-df <- read.csv("activity.csv")
-df$date <- ymd(df$date)
-cc <- complete.cases(df)
+df <- read.csv("activity.csv")  # read the data
+df$date <- ymd(df$date)         # convert the date from string 'Factor' to date class
+
+cc <- complete.cases(df)        # remove NA's
 goodDf <- df[cc,]
 
 ```
 
 ## What is mean total number of steps taken per day?
 
+```{r}
+aggMean <- aggregate(steps ~ date, goodDf, mean)  # aggregate by date, take mean of number of steps
+aggSum  <- aggregate(steps ~ date, goodDf, sum)   # aggregate by date, take sum of number of steps
 
+hist(aggSum$steps, breaks=20, xlab="steps per day", main="Number of steps per day")
+
+extra <- data.frame(aggSum$date, aggSum$steps, aggMean$steps)  # assemble new data frame to report mean, sum
+names(extra) <- c("Date", "Sum", "Mean")
+extra
+```
 
 ## What is the average daily activity pattern?
 
+```{r}
+aggInterval <- aggregate(steps ~ interval, goodDf, mean)
+plot(aggInterval$interval, aggInterval$steps, type = "l", xlab="Interval (each day)", ylab="Average number of steps")
+title(main="Average number of steps per interval each day")
 
+sorted <- aggInterval[with(aggInterval, order(steps, decreasing=TRUE)),]
+maxInterval <- sorted[1,1]
+maxAvgVal <- sorted[1,2]
+```
+
+The interval numbered `r maxInterval` is the one with the highest number of averages steps, `r maxAvgVal`.
 
 ## Imputing missing values
 
