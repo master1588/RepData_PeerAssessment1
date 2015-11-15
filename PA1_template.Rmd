@@ -22,12 +22,13 @@ goodDf <- df[cc,]
 
 ```{r}
 aggMean <- aggregate(steps ~ date, goodDf, mean)  # aggregate by date, take mean of number of steps
+aggMedian <- aggregate(steps ~ date, goodDf, median)  # aggregate by date, take median of number of steps
 aggSum  <- aggregate(steps ~ date, goodDf, sum)   # aggregate by date, take sum of number of steps
 
 hist(aggSum$steps, breaks=20, xlab="steps per day", main="Number of steps per day")
 
-extra <- data.frame(aggSum$date, aggSum$steps, aggMean$steps)  # assemble new data frame to report mean, sum
-names(extra) <- c("Date", "Sum", "Mean")
+extra <- data.frame(aggSum$date, aggSum$steps, aggMean$steps, aggMedian$steps)  # assemble new data frame to report mean, sum, median
+names(extra) <- c("Date", "Sum", "Mean", "Median")
 extra
 ```
 
